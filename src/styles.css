@@ -1,0 +1,84 @@
+/*
+  * Este código CSS define los estilos para un modal y los botones flotantes
+  * (FABS). Los modales tienen animaciones de transición para la apertura y 
+  * cierre, un fondo semitransparente. y el contenido está centrado en la }
+  * pantalla. Los FABS son botones circulares flotantes con posición fija
+  * y estilos distintivos, útiles para acciones como agregar o eliminar elementos
+*/
+
+/* Establece la opacidad inicial de los elementosdel portal modal a 0 */
+.ReactModalPortal > div{
+  opacity: 0;
+}
+
+/* Define el estilo del overlay del modal para centrarlo en pantalla,
+con animación de transición suave y alta prioridad en el apilamiento visual */
+.ReactModalPortal .ReactModal__Overlay {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  transition: opacity .2s ease-in-out;
+  z-index: 999;
+}
+
+/* Fondo modal cubriendo toda la pantalla con un color negro semitransparente */
+.modal-fondo {
+  background-color: rgba(0, 0, 0, 0.3);
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+}
+
+/* Añade opacidad cuando el modal está completamente abierto */
+.ReactModalPortal .ReactModal__Overlay--after-open {
+  opacity: 1;
+}
+
+/* Elimina la opacidad cuando el modal está cerrando */
+.ReactModalPortal .ReactModal__Overlay--before-close {
+  opacity: 0;
+}
+
+/* Estilo del contenido del modal:
+  - Fondo blanco
+  - Bordes redondeados
+  - Color de texto oscuro
+  - Máximas dimensiones de ancho y alto
+  - Espaciado interno y eliminación de outline */
+.modal {
+  background: white;
+  border-radius: 5px;
+  color: rgb(51, 51, 51);
+  display: inline;
+  max-height: 620px;
+  max-width: 500px;
+  outline: none;
+  padding: 10px;
+}
+
+/* Floating Action Buttons (FABS) */
+
+/* Estilo del botón flotante con forma circular, tamaño grande, y posición fija 
+en la esquina inferior derecha de la pantalla */
+.fab {
+  border-radius: 100%;
+  bottom: 25px;
+  font-size: 30px;
+  padding: 25px;
+  position: fixed;
+  right: 25px;
+}
+
+/* Estilo de un botón flotante "peligroso" (Eliminar),
+ similar al anterior pero con tamaño y posición ajustados */
+.fab-danger {
+  border-radius: 100%;
+  bottom: 25px;
+  font-size: 22px;
+  height: 70px;
+  left: 25px;
+  position: fixed;
+  width: 70px;
+}

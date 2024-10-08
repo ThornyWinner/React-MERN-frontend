@@ -1,0 +1,81 @@
+/** Contenedor principal (.login-container): Añade margen superior para centrar verticalmente.
+/** Estilos de las cajas de los formularios (.login-form-1 y .login-form-2): tienen bordes redondeados, 
+/** sombra para destacar el formulario, y un relleno interno para espaciado. El formulario de ingreso tiene 
+/** un fondo blanco mientras que el formulario de registro tiene un fondo azul.
+/** Botones de envío (.btnSubmit): Están estilizados para que sean fáciles de identificar y tienen un relleno 
+/** extra y bordes redondeados para mejorar su apariencia y usabilidad.
+/** Enlaces de "Olvidaste tu contraseña" (.ForgetPwd): Están diseñados de manera que mantengann el esquema de 
+/** colores correspondiente a cada formulario, con negrita y sin subrayado.*/
+
+/* Estilo general para el contenedor del formulario de login*/
+.login-container{
+    margin-top: 15%;    /* Espacio superior para centrar el contenedor verticalmente */
+}
+
+/* Estilo para el formulario de ingreso (login-form-1) */
+.login-form-1{
+    border-radius: 5px; /* Bordes redondeados */
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);   /* Sombra para darle relieve */
+    padding: 5%;    /* Relleno interno del formulario */
+}
+
+/* Estilo para el título dentro del formaulario de ingreso */
+.login-form-1 h3{
+    text-align: center; /* Alinea el texto del título al centro*/
+    color: #333;    /* Color del texto en gris oscuro */
+}
+
+/* Estilo para el formulario de registro (login-form-2) */
+.login-form-2{
+    border-radius: 5px; /* Bordes redondeados */
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);   /* Sombra para darle relieve */
+    padding: 5%;    /* Relleno interno del formulario */
+    background: #0062cc;    /* Color de fondo azul */
+}
+
+/* Estilo para el título dentro del formulario de registro */
+.login-form-2 h3{
+    text-align: center; /* Alinea el texto del título al centro */
+    color: #fff;    /* Color del texto en blanco */
+}
+
+/* Estilo general para los formularios */
+.login-container form{
+    padding: 10%;   /* Espacio interno del formulario */
+}
+
+/* Estilo para los botones de envío (Submit) en ambos formularios */
+.btnSubmit
+{
+    border-radius: 1rem;    /* Bordes redondeados para los botones */
+    padding: 1.5%;  /* Relleno interno del botón */
+    border: none; /* Sin borde */
+    cursor: pointer;    /* Cambia el cursor al pasar por el botón */
+    margin: 0px 10px;   /* Margen horizontal */
+}
+
+/* Estilo específico para el botón de envío en el formulario de ingreso */
+.login-form-1 .btnSubmit{
+    color: #fff;    /* Texto blanco */
+    background-color: #0062cc;  /* Fondo azul */
+}
+
+/* Estilo específico para el botón de envío en el formulario de registro */
+.login-form-2 .btnSubmit{
+    background-color: #fff; /* Fondo blanco*/
+    color: #0062cc; /* Texto azul */
+}
+
+/* Estilo para el enlace de "Olvidaste tu contraseña" en el formulario de registro*/
+.login-form-2 .ForgetPwd{
+    color: #fff;    /* Texto blanco*/
+    font-weight: 600;   /* Texto en negrita */
+    text-decoration: none;  /* Sin subrayado */
+}
+
+/* Estilo para el enlace de "Olvidaste tu contraseña" en el formulario de ingreso */
+.login-form-1 .ForgetPwd{
+    color: #0062cc; /* Texto azul */
+    font-weight: 600;   /* Texto en negrita */
+    text-decoration: none;  /* Sin subryado */
+}
