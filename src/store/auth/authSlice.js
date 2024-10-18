@@ -1,4 +1,4 @@
-const { createSlice } = require("@reduxjs/toolkit");
+import { createSlice } from "@reduxjs/toolkit";
 
 export const authSlice = createSlice({
     name: 'auth',
@@ -22,4 +22,4 @@ export const authSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { onChecking, onLogin } = authSlice.actions;
+export const { checking, onLogin } = authSlice.actions;
