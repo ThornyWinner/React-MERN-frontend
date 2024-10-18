@@ -8,12 +8,13 @@
 // Importa la función configureStore de Redux Toolkit para crear el store de la aplicación
 import { configureStore } from '@reduxjs/toolkit';
 // Importa los slices (sub-reductores) para manejar las funcionalidadades de UI y calendario
-import { uiSlice, calendarSlice } from '../store/index';
+import { uiSlice, calendarSlice, authSlice } from '../store/index';
 
 // Configura el store de Redux
 export const store = configureStore({
     // Define los reductores (reducers) que manejarán el estado de cada parte de la aplicación
     reducer: {
+        auth: authSlice.reducer,
         // El estado del calendario es manejado por el reducer calendarSlice
         calendar: calendarSlice.reducer,
         // El estado de UI es manejado por el reducer uiSlice
