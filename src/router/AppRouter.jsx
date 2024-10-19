@@ -15,8 +15,8 @@ import { CalendarPage } from '../calendar';
 // Define el componente principal de rutas de la aplicación
 export const AppRouter = () => {
 
-    // Estado de autenticación simulado ( puede ser 'authenticated' o 'not-authenticated')
-    const authStatus = 'authenticated';
+    // Estado de autenticación simulado (puede ser 'authenticated' o 'not-authenticated')
+    const authStatus = 'not-authenticated';
 
     return (
         <Routes>

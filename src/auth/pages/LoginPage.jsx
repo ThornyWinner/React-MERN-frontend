@@ -6,10 +6,39 @@
 
 
 // Importa el archivo de estilos CSS para la página de inicio de sesión
+import { useAuthStore, useForm } from '../../hooks';
 import './LoginPage.css';
+
+const loginFormFields = {
+    loginEmail: '',
+    loginPassword: ''
+}
+
+const registerFormFields = {
+    registerName: '',
+    registerEmail: '',
+    registerPassword: '',
+    registerPassword2: ''
+}
 
 // Componente funcional que renderiza la página de inicio de sesión y registro
 export const LoginPage = () => {
+    
+    const { startLogin } = useAuthStore();
+
+    const { loginEmail, loginPassword, onInputChange:onLoginInputChange } = useForm( loginFormFields );
+    const { registerEmail, registerName, registerPassword, registerPassword2, onInputChange:onRegisterInputChange } = useForm( registerFormFields );
+
+    const loginSubmit = ( event ) => {
+        event.preventDefault();
+        startLogin({ email: loginEmail, password: loginPassword });
+    }
+
+    const registerSubmit = ( event ) => {
+        event.preventDefault();
+        console.log({ registerName, registerEmail, registerPassword, registerPassword2 });
+    }
+
     return (
         <div className="container login-container">
             <div className="row">
@@ -17,13 +46,16 @@ export const LoginPage = () => {
                 {/* Formulario de ingreso */}
                 <div className="col-md-6 login-form-1">
                     <h3>Ingreso</h3>
-                    <form>
+                    <form onSubmit={ loginSubmit }>
                         {/* Campo de entrada para el correo electrónico */}
                         <div className="form-group mb-2">
                             <input 
                                 type="text"
                                 className="form-control"
                                 placeholder="Correo"
+                                name="loginEmail"
+                                value={ loginEmail }
+                                onChange={ onLoginInputChange }
                             />
                         </div>
                         {/* Campo de entrada para la contraseña */}
@@ -32,6 +64,9 @@ export const LoginPage = () => {
                                 type="password"
                                 className="form-control"
                                 placeholder="Contraseña"
+                                name="loginPassword"
+                                value={ loginPassword }
+                                onChange={ onLoginInputChange }
                             />
                         </div>
                         {/* Botón de encío de formulario de login */}
@@ -48,13 +83,16 @@ export const LoginPage = () => {
                 {/* Formulario de registro */}
                 <div className="col-md-6 login-form-2">
                     <h3>Registro</h3>
-                    <form>
+                    <form onSubmit={ registerSubmit }>
                         {/* Campo de entrada para el nombre */}
                         <div className="form-group mb-2">
                             <input
                                 type="text"
                                 className="form-control"
                                 placeholder="Nombre"
+                                name="registerName"
+                                value={ registerName }
+                                onChange={ onRegisterInputChange }
                             />
                         </div>
                         {/* Campo de entrada para el correo electrónico */}
@@ -63,6 +101,9 @@ export const LoginPage = () => {
                                 type="email"
                                 className="form-control"
                                 placeholder="Correo"
+                                name="registerEmail"
+                                value={ registerEmail }
+                                onChange={ onRegisterInputChange }
                             />
                         </div>
                         {/* Campo de entrada para la contraseña */}
@@ -70,7 +111,10 @@ export const LoginPage = () => {
                             <input
                                 type="password"
                                 className="form-control"
-                                placeholder="Contraseña" 
+                                placeholder="Contraseña"
+                                name="registerPassword"
+                                value={ registerPassword }
+                                onChange={ onRegisterInputChange }
                             />
                         </div>
                         {/* Campo de entrada para repetir la contraseña */}
@@ -78,7 +122,10 @@ export const LoginPage = () => {
                             <input
                                 type="password"
                                 className="form-control"
-                                placeholder="Repita la contraseña" 
+                                placeholder="Repita la contraseña"
+                                name="registerPassword2"
+                                value={ registerPassword2 }
+                                onChange={ onRegisterInputChange }
                             />
                         </div>
                         {/* Botón de envío de formulario de registro */}
