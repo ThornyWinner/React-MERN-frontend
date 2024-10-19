@@ -15,27 +15,28 @@
 
 
 import { createSlice } from "@reduxjs/toolkit";
-import { addHours } from "date-fns";
+// import { addHours } from "date-fns";
 
 // Evento temporal para inicializar el estado
-const tempEvent = {
-    _id: new Date().getTime(),  // ID único generado con el timestamp actual
-    title: 'Cumpleaños del Jefe',
-    notes: 'Hay que comprar el pastel',
-    start: new Date(),  // Fecha de inicio del evento
-    end: addHours( new Date(), 2),  // Fecha de fin, 2 horas después del inicio
-    bgColor: '#fafafa', // Color de fondo
-    user: {
-      _id: '123',   // ID del usuario asociado al evento 
-      name: 'Héctor'
-    }
-  }
+// const tempEvent = {
+//     _id: new Date().getTime(),  // ID único generado con el timestamp actual
+//     title: 'Cumpleaños del Jefe',
+//     notes: 'Hay que comprar el pastel',
+//     start: new Date(),  // Fecha de inicio del evento
+//     end: addHours( new Date(), 2),  // Fecha de fin, 2 horas después del inicio
+//     bgColor: '#fafafa', // Color de fondo
+//     user: {
+//       _id: '123',   // ID del usuario asociado al evento 
+//       name: 'Héctor'
+//     }
+//   }
 
 export const calendarSlice = createSlice({
     name: 'calendar',   // Nomrbe del slice
     initialState: {
+        isLoadingEvents: true,
         events: [
-            tempEvent
+            // tempEvent
         ],  // Estado inicial con un evento temporal
         activeEvent: null   // Evento activo inicialmente es nulo (ningún evento seleccionado)
     },
@@ -52,7 +53,7 @@ export const calendarSlice = createSlice({
         // Reducer para actualizar un evento existente
         onUpdateEvent: ( state, { payload } ) => {
             state.events = state.events.map( event => {
-                if( event._id === payload._id ){
+                if( event.id === payload.id ){
                     return payload; // Reemplaza el evento si los IDs coinciden
                 }
                 
@@ -62,13 +63,36 @@ export const calendarSlice = createSlice({
         // Reducer para eliminar el evento activo
         onDeleteEvent: ( state ) => {
             if ( state.activeEvent ){
-                state.events = state.events.filter( event => event._id !== state.activeEvent._id ); // Filtra el evento activo
+                state.events = state.events.filter( event => event.id !== state.activeEvent.id ); // Filtra el evento activo
                 state.activeEvent = null ;  // Limpia el evento activo 
             }
+        },
+        onLoadEvents: (state, { payload = [] }) => {
+            state.isLoadingEvents = false;
+            // state.events = payload;
+            payload.forEach( event => {
+                const exists = state.events.some( dbEvent => dbEvent.id === event.id );
+                if ( !exists ) {
+                    state.events.push( event )
+                }
+            })
+        },
+        onLogoutCalendar:( state ) => {
+            state.isLoadingEvents = true,
+            state.events = [
+            ],  // Estado inicial con un evento temporal
+            state.activeEvent = null   // Evento activo inicialmente es nulo (ningún evento seleccionado)
         }
     }
 });
 
 
 // Action creators generados automáticamente para cada función reductora
-export const { onSetActiveEvent, onAddNewEvent, onUpdateEvent, onDeleteEvent } = calendarSlice.actions;
+export const {
+    onAddNewEvent,
+    onDeleteEvent,
+    onLoadEvents,
+    onLogoutCalendar,
+    onSetActiveEvent,
+    onUpdateEvent
+} = calendarSlice.actions;
