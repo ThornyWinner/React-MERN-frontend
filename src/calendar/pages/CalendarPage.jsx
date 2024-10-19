@@ -9,7 +9,7 @@
 
 
 // Importa los hooks de React y los componentes necesarios
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Calendar } from 'react-big-calendar';
 // Importa los estilos predeterminados de react-big-calendar
 import 'react-big-calendar/lib/css/react-big-calendar.css';
@@ -17,24 +17,27 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 //Importa componentes personalizados y helpers de la aplicación
 import { CalendarEvent, CalendarModal, FabAddNew, FabDelete, Navbar } from '../';
 import { localizer, getMessagesES } from '../../helpers';
-import { useUiStore, useCalendarStore } from '../../hooks';
+import { useUiStore, useCalendarStore, useAuthStore } from '../../hooks';
 
 // Componente que renderiza la página del calendario
 export const CalendarPage = () => {
 
+  const { user } = useAuthStore();
   // Hook personalizado para manejar el estado de la interfaz (UI)
   const { openDateModal } = useUiStore();
   // Hook personalizado para manejar el estado del calendario
-  const { events, setActiveEvent } = useCalendarStore();
+  const { events, setActiveEvent, startLoadingEvents } = useCalendarStore();
   
   // Estado para almacenar la última vista del calendario, guardada en localStorage para persistencia
   const [ lastView, setLastView ] = useState(localStorage.getItem('lastView') || 'week' );
 
   // Función que personaliza el estilo de los eventos del calendario
   const eventStyleGetter = ( event, start, end, isSelected ) => {
-
+    
+    const isMyEvent = ( user.uid === event.user._id ) || ( user.uid === event.user.uid );
+    
     const style = {
-      backgroundColor: '#347CF7', // Color de fondo azul
+      backgroundColor: isMyEvent ? '#347CF7' : '#465660', // Color de fondo azul
       borderRadius: '0px',  // Sin bordes redondeados
       opacity: 0.8, // Transparencia
       color: 'white'  // Texto en blanco
@@ -62,6 +65,12 @@ export const CalendarPage = () => {
     localStorage.setItem('lastView', event);  // Guarda la vista actual en localStorage
     setLastView(event); // Actualiza el estado de la vista
   }
+
+
+  useEffect(() => {
+    startLoadingEvents()
+  }, [])
+  
 
   return (
     <>

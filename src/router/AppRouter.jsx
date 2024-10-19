@@ -11,25 +11,51 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 // Importa la página de inicio de sesión (Login Page) y la página de calendario (CalendarPage)
 import { LoginPage } from '../auth';
 import { CalendarPage } from '../calendar';
+import { useAuthStore } from '../hooks';
+import { useEffect } from 'react';
 
 // Define el componente principal de rutas de la aplicación
 export const AppRouter = () => {
 
+    const { status, checkAuthToken } = useAuthStore();
     // Estado de autenticación simulado (puede ser 'authenticated' o 'not-authenticated')
-    const authStatus = 'not-authenticated';
+    //const authStatus = 'not-authenticated';
+    
+    useEffect(() => {
+      checkAuthToken();
+    }, [])
+    
+
+
+    if ( status === 'checking' ) {
+        return (
+            <h3>Cargando...</h3>
+        )
+    }
+
 
     return (
         <Routes>
             {
                 // Si el usuario no está autenticado, muestra la ruta de autenticación (LoginPage)
-                (authStatus === 'not-authenticated')    
-                ? <Route path='/auth/*' element={ <LoginPage /> }/>
+                (status === 'not-authenticated')    
+                ? (
+                    <>
+                        <Route path='/auth/*' element={ <LoginPage /> }/>
+                        {/* Redirección por defecto: si no coincide ninguna ruta, envía a /auth/login */}
+                        <Route path='/*' element={ <Navigate to="/auth/login" /> } />
+                    </>
+                )
                 // Si está autenticado, muestra la ruta del calendario (CalendarPage)
-                : <Route path='/*' element={ <CalendarPage /> }/>
+                : (
+                    <>
+                        <Route path='/' element={ <CalendarPage /> }/>
+                        <Route path='/*' element={ <Navigate to="/" /> } />
+                    </>
+                )
             }
             
-            {/* Redirección por defecto: si no coincide ninguna ruta, envía a /auth/login */}
-            <Route path='/*' element={ <Navigate to="/auth/login" /> } />
+            
         </Routes>
     )
 }

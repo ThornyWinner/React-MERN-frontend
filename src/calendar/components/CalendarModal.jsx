@@ -124,8 +124,7 @@ export const CalendarModal = () => {
             overlayClassName="modal-fondo"
             closeTimeoutMS={ 200 }  // Transición de cierre de 200ms
         >
-            // TODO: Cambiar de "Nuevo Evento" a "EVENTO"
-            <h1> NUEVO EVENTO </h1> 
+            <h1> Evento </h1> 
             <hr />
             <form className="container" onSubmit={ onSubmit }>
 
