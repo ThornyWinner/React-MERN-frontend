@@ -1,11 +1,13 @@
-/** Contenedor principal (.login-container): Añade margen superior para centrar verticalmente.
-/** Estilos de las cajas de los formularios (.login-form-1 y .login-form-2): tienen bordes redondeados, 
-/** sombra para destacar el formulario, y un relleno interno para espaciado. El formulario de ingreso tiene 
-/** un fondo blanco mientras que el formulario de registro tiene un fondo azul.
-/** Botones de envío (.btnSubmit): Están estilizados para que sean fáciles de identificar y tienen un relleno 
-/** extra y bordes redondeados para mejorar su apariencia y usabilidad.
-/** Enlaces de "Olvidaste tu contraseña" (.ForgetPwd): Están diseñados de manera que mantengann el esquema de 
-/** colores correspondiente a cada formulario, con negrita y sin subrayado.*/
+/* 
+ * Contenedor principal (.login-container): Añade margen superior para centrar verticalmente.
+ * Estilos de las cajas de los formularios (.login-form-1 y .login-form-2): tienen bordes redondeados, 
+ * sombra para destacar el formulario, y un relleno interno para espaciado. El formulario de ingreso tiene 
+ * un fondo blanco mientras que el formulario de registro tiene un fondo azul.
+ * Botones de envío (.btnSubmit): Están estilizados para que sean fáciles de identificar y tienen un relleno 
+ * extra y bordes redondeados para mejorar su apariencia y usabilidad.
+ * Enlaces de "Olvidaste tu contraseña" (.ForgetPwd): Están diseñados de manera que mantengan el esquema de 
+ * colores correspondiente a cada formulario, con negrita y sin subrayado.
+*/
 
 /* Estilo general para el contenedor del formulario de login*/
 .login-container{

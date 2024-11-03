@@ -1,33 +1,30 @@
-//* Estos action creators son exportados para ser utilizados en el código, por ejemplo, en el hook useUiStore que despacha estas acciones para abrir o cerrar el modal.
-//* createSlice: Esta función de Redux Toolkit es utilizada para crear un slice que contiene tanto el estado como los reducers que modifican su estado.
-//* - name: El nombre del slice, en este caso es 'ui'. Este nombre es importante porque se utiliza para nombrar el estado dentro del store global de Redux.
-//* - initialState: El estado inicial del slice, aquí se define que el modal (referido por isDateModalOpen) comienza como cerrado (valor false).
-//* - reducers: Son las funciones que definen cómo cambia el estado cuando una acción es despachada. En este caso:
-//*     + onOpenDateModal: Cambia el estado a true, lo que significa que el modal está abierto.
-//*     + onCloseDateModal: Cambia el estado a false, lo que significa que el modal está cerrado.
-//* Action creators: Redux Toolkit genera automáticamente los action creators (funciones que crean acciones) basados en los nombres de los reducers. 
-//*                  En este caso, se generan onOpenDateModal y onCloseDateModal.
+//* initialState: Define el estado inicial de la interfaz de usuario, en este caso, con isDateModalOpen en false, 
+//*               indicando que el modal de fecha está cerrado al inicio.
+//* Reducers:
+//*     - onOpenDateModal: Cambia el estado isDateModalOpen a true, abriendo el modal de fecha.
+//*     - onCloseDateModal: Cambia el estado isDateModalOpen a false, cerrando el modal de fecha.
+//* Exportación de acciones: Las acciones onOpenDateModal y onCloseDateModal se exportan para que puedan ser utilizadas en otros
+//*                          componentes, facilitando el control del estado del modal desde cualquier parte de la aplicación.
 
 
 import { createSlice } from '@reduxjs/toolkit';
 
 export const uiSlice = createSlice({
-    name: 'ui', // Nombre del slice, se usa para identificarlo en el store
+    name: 'ui',
     initialState: {
-        isDateModalOpen: false  // Estado inicial, donde el modal está cerrado (false)
+        isDateModalOpen: false  // Estado inicial del modal de fecha, cerrado por defecto
     },
     reducers: {
-        // Reducer para abrir el modal, establece isDateModalOpen en true
+        // Abre el modal de fecha
         onOpenDateModal: ( state ) => {
             state.isDateModalOpen = true;
         },
-        // Reducer para cerrar el modal, establece isDateModalOpen en false
+        // Cierra el modal de fecha
         onCloseDateModal: ( state ) => {
             state.isDateModalOpen = false;
         },
     }
 });
-
 
 // Exporta los action creators generados autómaticamente por Redux Toolkit
 export const { onOpenDateModal, onCloseDateModal } = uiSlice.actions;

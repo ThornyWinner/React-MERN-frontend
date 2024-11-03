@@ -1,15 +1,13 @@
-//* Este hook facilita la manipulación de eventos desde cualquier componente que necesite interactuar con el calendario. 
-//* Por ejemplo, un componente podría usar setActiveEvent para seleccionar un evento, o startSavingEvent para guardar uno.
-//* Este diseño deja espacio para futuras mejora, como agregar lógica para manejar interacciones con el backend (que está pendiente con los comentarios // TODO).
-//* setActiveEvent(calendarEvent): Establece el evento que ha sido seleccionado como el "evento activo". 
-//*                                Usa el dispatch para despachar la acción onSetActiveEvent con el evento que seleccionó.
-//* startSavingEvent(calendarEvent): Dependiendo de si el evento tiene un _id o no, decide si debe agregar un nuevo evento o actualizar uno existente. 
-//*                                  Si el evento tiene un _id, usa la acción onUpdateEvent para actualizar el evento. Si el evento no tiene un _id, 
-//*                                  lo trata como un nuevo evetno y despacha la acción onAddNewEvent, asignando un _id único generado por newDate().getTime().
-//* startDeletingEvent(): Elimina el evento activo actual utilizando la acción onDeleteEvent.
-//* hasEventSelected: Propiedad booleana que verifica si existe un evento activo seleccionado. 
-//*                   Es útil para habilitar o dehabilitar opciones como "Eliminar evento" en la interfaz.
-
+//* Propiedades extraídas del estado del calendario:
+//*     - events: Lista de eventos del calendario, obtenida desde el estado global.
+//*     - activeEvent: Evento actualmente activo o seleccionado.
+//* Funciones del hook:
+//*     - setActiveEvent: Selecciona un evento como el evento activo en el estado.
+//*     - startSavingEvent: Guarda el evento en el estado; si el evento tiene un _id, actualiza el evento existente,
+//*                         de lo contrario, crea un nuevo evento y le asigna un ID único.
+//*     - startDeletingEvent: Elimina el evento activo del estado.
+//* Retorno del hook: Propiedades y métodos que permiten a los componentes interactuar con el estado y realizar 
+//*                   operaciones CRUD sobre los eventos del calendario desde cualquier lugar de la aplicación.
 
 import { useDispatch, useSelector } from "react-redux"
 import Swal from "sweetalert2";
@@ -22,15 +20,21 @@ import { onAddNewEvent, onDeleteEvent, onLoadEvents, onSetActiveEvent, onUpdateE
 export const useCalendarStore = () => {
   
     const dispatch = useDispatch();
+<<<<<<< HEAD
+    const { events, activeEvent } = useSelector( state => state.calendar ); // Extraemos el estado del calendario desde Redux
+  
+    // Establece un evento activo
+=======
     const { events, activeEvent } = useSelector( state => state.calendar ); //Obtiene el estado de eventos y evento activo desde Redux
     const { user } = useSelector( state => state.auth );
 
     // Establece el evento activo (seleccionado)
+>>>>>>> cff31ad35a421d0e15a73fcf2ee8031810f50dca
     const setActiveEvent = ( calendarEvent ) => {
-        dispatch( onSetActiveEvent( calendarEvent ) );  // Despacha la acción para establecer el evento activo
+        dispatch( onSetActiveEvent( calendarEvent ) );
     }
 
-    // Guarda un evento, ya sea nuevo o actualizado
+    // Inicia la operación de guardar un evento, ya sea para actualizar o crear uno nuevo
     const startSavingEvent = async( calendarEvent ) => {
         
         try {
@@ -43,6 +47,15 @@ export const useCalendarStore = () => {
                 return;
             } 
 
+<<<<<<< HEAD
+        // Si el evento ya tiene un ID, se actualiza; si no, se crea uno nuevo
+        if( calendarEvent._id ) {
+            // Actualizando
+            dispatch( onUpdateEvent({ ...calendarEvent }) );
+        } else{
+            // Creando
+            dispatch( onAddNewEvent({ ...calendarEvent, _id: new Date().getTime() }) );
+=======
             // Creando
             const { data } = await calendarApi.post('/events', calendarEvent );
             dispatch( onAddNewEvent({ ...calendarEvent, id: data.evento.id, user }) ); // Despacha la acción para agregar un nuevo evento
@@ -50,6 +63,7 @@ export const useCalendarStore = () => {
         } catch (error) {
             console.log(error);
             Swal.fire('Error al guardar', error.response.data.msg, 'error');
+>>>>>>> cff31ad35a421d0e15a73fcf2ee8031810f50dca
         }
         
     }
@@ -65,6 +79,9 @@ export const useCalendarStore = () => {
         }
     }
 
+<<<<<<< HEAD
+        dispatch( onDeleteEvent() );
+=======
     const startLoadingEvents = async() => {
         try {
             
@@ -76,19 +93,25 @@ export const useCalendarStore = () => {
             console.log('Error cargando eventos');
             console.log(error);
         }
+>>>>>>> cff31ad35a421d0e15a73fcf2ee8031810f50dca
     }
     
     return {
         //* Propiedades
-        activeEvent,    // El evento activo actual
-        events, // Lista de todos los eventos
-        hasEventSelected: !!activeEvent,    // Verifica si hay un evento seleccionado
+        activeEvent,    // Evento actualmente seleccionado
+        events,     // Lista de eventos del calendario
+        hasEventSelected: !!activeEvent,    // Verifica si hay un evento activo
 
         //* Métodos
         startDeletingEvent, // Método para eliminar el evento activo
+<<<<<<< HEAD
+        setActiveEvent, // Método para seleccionar un evento como activo
+        startSavingEvent,   // Método para guardar o actualizar un evento
+=======
         setActiveEvent, // Método para establecer un evento como activo
         startLoadingEvents,
         startSavingEvent,   // Método para guardar un evento (crear o actualizar)
+>>>>>>> cff31ad35a421d0e15a73fcf2ee8031810f50dca
     }
 
 }

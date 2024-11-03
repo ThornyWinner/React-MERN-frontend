@@ -1,27 +1,39 @@
-//* configureStore: Es una función proporcionada por Redux Toolkit para crear el store de manera simplificada, 
-//*                 con soporte integrado para middlewares y herramientas de desarrollo.
-//* reducer: Aquí se definen los slices que gestionan las diferentes partes del estado (en este caso, calendar y ui).
-//* middleware: Se usa para deshabilitar la verificación de serialización, que normalmente lanza advertencias si 
-//*             detecta valores no serializables en el estado o acciones. Esto puede ser útil cuando se manejan objetos como fechas, 
-//*             que no son serializables por defecto.
+//* Reducer: Agrupa los slices en un solo objeto de reducers. 
+//*     - auth: Gestiona el estado de autenticación.
+//*     - calendar: Administra el estado del calendario, incluyendo eventos y la selección de eventos.
+//*     - ui: Controla el estado de la UI, como la apertura y cierre de modales.
+//* Middleware de verificación de serializabilidad: serializableCheck: false: Desactiva la verificación de serializabilidad para evitar advertencias o 
+//*                                                 errores con objetos complejos (por ejemplo, fechas), permitiendo el uso de objetos que no son
+//*                                                 estrictamente serializables, como las instancias de Date.
 
-// Importa la función configureStore de Redux Toolkit para crear el store de la aplicación
+
 import { configureStore } from '@reduxjs/toolkit';
+<<<<<<< HEAD
+=======
 // Importa los slices (sub-reductores) para manejar las funcionalidadades de UI y calendario
 import { uiSlice, calendarSlice, authSlice } from '../store/index';
+>>>>>>> cff31ad35a421d0e15a73fcf2ee8031810f50dca
 
-// Configura el store de Redux
+import { uiSlice, calendarSlice, authSlice } from './';
+
+
 export const store = configureStore({
-    // Define los reductores (reducers) que manejarán el estado de cada parte de la aplicación
+    
     reducer: {
+<<<<<<< HEAD
+        auth: authSlice.reducer,    // Reducer para la autenticación
+        calendar: calendarSlice.reducer,    // Reducer para el calendario
+        ui: uiSlice.reducer // Reducer para la interfaz de usuario
+=======
         auth: authSlice.reducer,
         // El estado del calendario es manejado por el reducer calendarSlice
         calendar: calendarSlice.reducer,
         // El estado de UI es manejado por el reducer uiSlice
         ui: uiSlice.reducer
+>>>>>>> cff31ad35a421d0e15a73fcf2ee8031810f50dca
     },
-    // Configura el mmiddleware del store, deshabilitando la verificación de serialización
+    
     middleware: ( getDefaultMiddleWare ) => getDefaultMiddleWare({
-        serializableCheck: false
+        serializableCheck: false    // Desactiva la verificación de serializabilidad para evitar errores con objetos no serializables
     })
 })
