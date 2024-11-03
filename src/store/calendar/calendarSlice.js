@@ -14,7 +14,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 // import { addHours } from "date-fns";
 
-<<<<<<< HEAD
 // Evento temporal de ejemplo para inicializar el estado
 const tempEvent = {
     _id: new Date().getTime(),
@@ -28,36 +27,15 @@ const tempEvent = {
       name: 'Héctor'
     }
   }
-=======
-// Evento temporal para inicializar el estado
-// const tempEvent = {
-//     _id: new Date().getTime(),  // ID único generado con el timestamp actual
-//     title: 'Cumpleaños del Jefe',
-//     notes: 'Hay que comprar el pastel',
-//     start: new Date(),  // Fecha de inicio del evento
-//     end: addHours( new Date(), 2),  // Fecha de fin, 2 horas después del inicio
-//     bgColor: '#fafafa', // Color de fondo
-//     user: {
-//       _id: '123',   // ID del usuario asociado al evento 
-//       name: 'Héctor'
-//     }
-//   }
->>>>>>> cff31ad35a421d0e15a73fcf2ee8031810f50dca
 
 export const calendarSlice = createSlice({
     name: 'calendar',
     initialState: {
         isLoadingEvents: true,
         events: [
-<<<<<<< HEAD
             tempEvent   // Inicialización del evento temporal
         ],
         activeEvent: null   // Ningun evento activo	por defecto
-=======
-            // tempEvent
-        ],  // Estado inicial con un evento temporal
-        activeEvent: null   // Evento activo inicialmente es nulo (ningún evento seleccionado)
->>>>>>> cff31ad35a421d0e15a73fcf2ee8031810f50dca
     },
     reducers: {
         // Activa un evento seleccionándolo
@@ -72,13 +50,8 @@ export const calendarSlice = createSlice({
         // Actualiza un evento en la lista de eventos
         onUpdateEvent: ( state, { payload } ) => {
             state.events = state.events.map( event => {
-<<<<<<< HEAD
                 if( event._id === payload._id ){    // Identifica el evento a actualizar
                     return payload; // Retorna el evento actualizado
-=======
-                if( event.id === payload.id ){
-                    return payload; // Reemplaza el evento si los IDs coinciden
->>>>>>> cff31ad35a421d0e15a73fcf2ee8031810f50dca
                 }
                 
                 return event;   // Retorna el evento sin cambios
@@ -87,13 +60,8 @@ export const calendarSlice = createSlice({
         // Elimina el evento activo
         onDeleteEvent: ( state ) => {
             if ( state.activeEvent ){
-<<<<<<< HEAD
                 state.events = state.events.filter( event => event._id !== state.activeEvent._id );
                 state.activeEvent = null ;  // Desactiva el evento activo tras eliminarlo
-=======
-                state.events = state.events.filter( event => event.id !== state.activeEvent.id ); // Filtra el evento activo
-                state.activeEvent = null ;  // Limpia el evento activo 
->>>>>>> cff31ad35a421d0e15a73fcf2ee8031810f50dca
             }
         },
         onLoadEvents: (state, { payload = [] }) => {

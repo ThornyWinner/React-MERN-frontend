@@ -8,11 +8,6 @@
 
 
 import { configureStore } from '@reduxjs/toolkit';
-<<<<<<< HEAD
-=======
-// Importa los slices (sub-reductores) para manejar las funcionalidadades de UI y calendario
-import { uiSlice, calendarSlice, authSlice } from '../store/index';
->>>>>>> cff31ad35a421d0e15a73fcf2ee8031810f50dca
 
 import { uiSlice, calendarSlice, authSlice } from './';
 
@@ -20,17 +15,9 @@ import { uiSlice, calendarSlice, authSlice } from './';
 export const store = configureStore({
     
     reducer: {
-<<<<<<< HEAD
         auth: authSlice.reducer,    // Reducer para la autenticación
         calendar: calendarSlice.reducer,    // Reducer para el calendario
         ui: uiSlice.reducer // Reducer para la interfaz de usuario
-=======
-        auth: authSlice.reducer,
-        // El estado del calendario es manejado por el reducer calendarSlice
-        calendar: calendarSlice.reducer,
-        // El estado de UI es manejado por el reducer uiSlice
-        ui: uiSlice.reducer
->>>>>>> cff31ad35a421d0e15a73fcf2ee8031810f50dca
     },
     
     middleware: ( getDefaultMiddleWare ) => getDefaultMiddleWare({
