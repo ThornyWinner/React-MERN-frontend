@@ -1,40 +1,44 @@
-//* setActiveEvent: Establece un nuevo evento vacío (sin título ni notas, y con una duración de 2 horas a partir de la fecha actual). 
-//*                 Esto simula la creación de un nuevo evento en el calendario.
-//* openDateModal: Abre el modal para que el usuario pueda agregar la información del nuevo evento.
-//* Botón flotante: El botón tiene una clase fab (botón de acción flotante) que usualmente es un pequeño botón ubicado en una esquina, con el icono de "agregar" (fa-plus).
+//* Hooks y estado: Define openDateModal y setActiveEvent para abrir el modal y preparar los valores de un nuevo evento.
+//* Manejador de clic: La función handleClickNeW crea un nuevo evento con valores iniciales predeterminados.
+//* Renderización: Renderiza un botón flotante que, al hacer clic, ejecuta la función handleClickNeW y abre el modal de evento.
 
 
-import { addHours } from "date-fns";    // Función para manipular horas
-import { useCalendarStore, useUiStore } from "../../hooks"  // Hooks personalizados para manejar el estado del calendario y la UI
+// Importamos las funciones para manejar fechas y hooks personalizados
+import { addHours } from "date-fns";
+import { useCalendarStore, useUiStore } from "../../hooks"
 
+// Componente de botón flotante FabAddNew para crear un nuevo evento en el calendario
 export const FabAddNew = () => {
   
-    const { openDateModal } = useUiStore(); // Hook para abrir el modal
-    const { setActiveEvent } = useCalendarStore();  // Hook para establecer el evento activo
+    // Función para abrir el modal desde el hook personalizado useUiStore
+    const { openDateModal } = useUiStore();
+    // Función para establecer un evento activo en el estado del calendario desde useCalendarStore
+    const { setActiveEvent } = useCalendarStore();
 
-    // Función que se ejecuta al hacer clic en el botón
+    // Función para manejar el clic en el botón y establecer los valores predeterminados del nuevo evento
     const handleClickNeW= () => {
-        //Establecer un evento por defecto como "activo" al hacer clic
+        
         setActiveEvent({
-            title: '',  // Título vacío
-            notes: '',  // Notas vacías
-            start: new Date(),  // Fecja de inicio: fecha y hora actuales
-            end: addHours( new Date(), 2),  // Fecha de fin: 2 horas después de la fecha actual
+            title: '',  // Título vacío como valor inicial
+            notes: '',  // Notas vacías como valor inicial
+            start: new Date(),  // Fecha de inicio como la actual
+            end: addHours( new Date(), 2),  // Fecha de finalización dos horas después de la de inicio
             bgColor: '#fafafa', // Color de fondo predeterminado
             user: {
-              _id: '123',   // ID de usuario por defecto (temporal)
-              name: 'Héctor'    // Nombre del usuario predeterminado
+              _id: '123',   // ID de usuario de ejemplo
+              name: 'Héctor'    // Nombre del usuario que crea el evento
             }
         });
-        openDateModal();    // Abrir el modal de edición/creación del evento
+        openDateModal();    // Abre el modal de creación de evento
     }
 
+    // Renderización del botón flotante con icono de "más" y un evento de clic
     return (
     <button
-        className="btn btn-primary fab" // Clase CSS para estilo flotante
-        onClick={ handleClickNeW }  // Ejecuta la función al hacer clic
+        className="btn btn-primary fab"
+        onClick={ handleClickNeW }
     >
-        <i className="fas fa-plus"></i> {/* Icono de "agregar nuevo" */}
+        <i className="fas fa-plus"></i> 
     </button>
   )
 }

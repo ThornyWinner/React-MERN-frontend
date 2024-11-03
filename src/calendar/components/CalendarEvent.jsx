@@ -1,17 +1,17 @@
-//* Este componente es utilizado para personalizar cómo se ven los eventos dentro del calendario. 
-//* Cada evento del calendario mostrará su título seguido del nombre del usuario.
+//* Extracción de propiedades: El componente desestructura title y user desde el objeto event.
+//* Renderización: Muestra el title del evento en negrita y el name del user asociado, separados por un guion.
 
-// Componente que renderiza un evento específico en el calendario
+
+// Componente funcional CalendarEvent para mostrar detalles de un evento del calendario.
 export const CalendarEvent = ({ event }) => {
     
-    // Desestructura el título del evento y el nombre del usuario
+     // Extraemos las propiedades title (título del evento) y user (usuario que creó el evento) del objeto event.
     const { title, user } = event;
     
     return (
         <>
-            {/* Muestra el título del evento en negrita */}
+            {/* Renderizamos el título del evento en negrita y el nombre del usuario asociado al evento */}
             <strong>{ title }</strong>
-            {/* Muestra el nombre del usuario responsable del evento */}
             <span> - { user.name }</span>
         </>
     )

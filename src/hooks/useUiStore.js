@@ -1,50 +1,51 @@
-//* El hook facilita la gestión del estado del modal de forma centralizada.
-//* useSelector: Se utiliza para extraer el estado isDateModalOpen del store de Redux, que determina si el modal está abierto o cerrado.
-//* useDispatch: Permite despachar acciones a Redux, en esta caso onOpenDateModal y onCloseDateModal.
-//* openDateModal y closeDateModal: Son funciones que despachan las acciones correspondientes para abrir o cerrar el modal.
-//* toggleDateModal: Esta función alterna el estado del modal, abriéndolo si está cerrado y cerrándolo si está abierto.
+//* Estados y disparadores de Redux: useDispatch y useSelector de Redux se utilizan para despachar acciones y 
+//*                                  obtener el estado de isDateModalOpen, que controla la visibilidad del modal.
+//* Métodos:
+//*     - openDateModal: Abre el modal cambiando el estado mediante la acción onOpenDateModal.
+//*     - closeDateModal: Cierra el modal utilizando la acción onCloseDateModal.
+//*     - toggleDateModal: Alterna el estado del modal, abriendo si está cerrado y cerrando si está abierto.
+//* Propiedades devueltas:
+//*     - isDateModalOpen: Estado actual del modal (true si está abierto).
+//*     - closeDateModal, openDateModal, y toggleDateModal: Métodos para controlar la visibilidad del modal.
 
 
 import { useDispatch, useSelector } from 'react-redux';
 import { onCloseDateModal, onOpenDateModal } from '../store';
 
-
 export const useUiStore = () => {
 
     const dispatch = useDispatch();
 
-    // Selecciona la parte del estado que controla el modal del calendario desde el store de Redux.
+    // Extrae el estado de visibilidad del modal de fechas desde Redux
     const { 
         isDateModalOpen
     } = useSelector( state => state.ui );
 
-    // Abre el modal despachando la acción onOpenDateModal
+    // Método para abrir el modal
     const openDateModal = () => {
         dispatch( onOpenDateModal() )
     }
 
-    // Cierra el modal despachando la acción onCloseDateModal
+    // Método para cerrar el modal
     const closeDateModal = () => {
         dispatch( onCloseDateModal() )
     }
 
-    // Alterna el estado del modal, abriéndolo o cerrándolo según el valor actual de isDateModalOpen
+    // Método para alternar el estado del modal
     const toggleDateModal = () => {
         (isDateModalOpen)
-            ? openDateModal()   // Si el modal está abierto, lo vuelve a abrir (aunque este comportamiento podría parecer redundante)
-            : closeDateModal(); // Si el modal está cerrado, lo cierra 
+            ? openDateModal()   
+            : closeDateModal(); 
     }
-
-
 
     return {
         //* Propiedades
-        isDateModalOpen,    // Esgado del modal, si está abierto o cerrado
+        isDateModalOpen,    
 
         //* Métodos
-        closeDateModal, // Método para cerrar el modal
-        openDateModal,  // Método para abrir el modal
-        toggleDateModal,    // Método para alternar el estado del modal
+        closeDateModal,
+        openDateModal, 
+        toggleDateModal,  
     }
 
 }

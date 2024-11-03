@@ -1,8 +1,5 @@
-/*
- * Este código es responsable de renderizar el componente principal CalendarApp 
- * dentro del elemento raíz (root) del HTML, aplicando los estilos y utilizando 
- * el modo estricto de React para detectar problemas potenciales en el código.
-*/
+//* Este código es responsable de renderizar el componente principal CalendarApp dentro del elemento raíz (root) del HTML, 
+//* aplicando los estilos y utilizando el modo estricto de React para detectar problemas potenciales en el código.
 
 import React from 'react';  // Importa React para crear componentes de la interfaz
 import ReactDOM from 'react-dom/client';  // Importa ReactDOM para manipular el DOM de la página web

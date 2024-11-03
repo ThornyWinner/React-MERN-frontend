@@ -1,40 +1,97 @@
-// * El componente LoginPage está dividido en dos secciones:
-// * - Formulario de ingreso (Login): Con campos para el correo electrónico y la contraseña, y un botón para enviar el formulario.
-// * - Formulario de registro (Registro): Incluye campos para el nombre, correo electrónico, contraseña y confirmación de contraseña, y un botón para crear una cuenta.
-// * Ambos formularios están organizados en columnas usando clases de Bootstrap, y el diseño está adaptado para pantallas pequeñas y MediaElementAudioSourceNode.
-// * La clase btnSubmit se usa para estilizar los botones de envío. Las clases form-cotnrol, d-grid, y mb-2 son clases de Bootstrap para el estilo y la disposición del contenido.
+//* Importaciones: Importa módulos necesarios (React, useAuthStore, useForm, estilos, y Swal).
+//* Constantes para formularios: Define estructuras iniciales para los formularios.
+//* Función LoginPage: Maneja el componente principal de la página, usa useAuthStore para autenticación y useForm para los datos.
+//* Envío de Formularios: Define loginSubmit y registerSubmit para manejar la lógica y validación de cada formulario.
+//* Error de autenticación: Usa useEffect para mostrar una alerta en caso de error.
+//* Renderización: Renderiza los formularios de login y registro en el DOM.
 
-
-// Importa el archivo de estilos CSS para la página de inicio de sesión
+// Importaciones necesarias desde React, hooks personalizados, estilos CSS y SweetAlert2 para alertas visuales.
+import { useEffect } from 'react';
+import { useAuthStore, useForm } from '../../hooks';
 import './LoginPage.css';
+import Swal from 'sweetalert2';
 
-// Componente funcional que renderiza la página de inicio de sesión y registro
+// Campos iniciales para el formulario de inicio de sesión
+const loginFormFields = {
+    loginEmail: '',
+    loginPassword: '',
+}
+
+// Campos iniciales para el formulario de registro
+const registerFormFields = {
+    registerName: '',
+    registerEmail: '',
+    registerPassword: '',
+    registerPassword2: '',
+}
+
+// Componente LoginPage que contiene formularios de inicio de sesión y registro
 export const LoginPage = () => {
+
+    //Extraemos funciones y variables del hook de autenticación
+    const { startLogin, errorMessage, startRegister } = useAuthStore();
+
+    // Utilizamos el hook useForm para manejar el estado de los formularios de inicio de sesión y registro
+    const { loginEmail, loginPassword, onInputChange:onLoginInputChange } = useForm( loginFormFields );
+    const { registerEmail, registerName, registerPassword, registerPassword2, onInputChange:onRegisterInputChange } = useForm( registerFormFields );
+
+    // Función para manejar el envío del formulario de inicio de sesión
+    const loginSubmit = ( event ) => { 
+        event.preventDefault(); // Evitamos el comportamiento predeterminado del formulario
+        startLogin({ email: loginEmail, password: loginPassword }); // Ejecutamos la función startLogin con las credenciales ingresadas
+    }
+
+    // Función para manejar el envío del formulario de registro
+    const registerSubmit = ( event ) => { 
+        event.preventDefault();
+        // Verificamos si las contraseñas coinciden antes de enviar el formulario
+        if ( registerPassword !== registerPassword2 ){
+            Swal.fire('Error en registro', 'Las contraseñas no coinciden', 'error');    // Mostramos una alerta si las contraseñas no coinciden
+            return;
+        }
+
+        startRegister({ name: registerName, email: registerEmail, password: registerPassword });    // Ejecutamos la función startRegister con los datos del formulario
+    }
+
+    // useEffect para manejar el error de autenticación y mostrar una alerta si existe un mensaje de error
+    useEffect(() => {
+        if ( errorMessage !== undefined ){
+            Swal.fire('Error en la autenticación', errorMessage, 'error');
+        }
+    }, [errorMessage]);
+    
+    // Renderización del componente con dos formularios: uno para iniciar sesión y otro para registrarse
     return (
         <div className="container login-container">
             <div className="row">
                 
-                {/* Formulario de ingreso */}
+                {/* Formulario de Ingreso */}
                 <div className="col-md-6 login-form-1">
                     <h3>Ingreso</h3>
-                    <form>
-                        {/* Campo de entrada para el correo electrónico */}
+                    <form onSubmit={ loginSubmit }>
+                        
                         <div className="form-group mb-2">
                             <input 
                                 type="text"
                                 className="form-control"
                                 placeholder="Correo"
+                                name='loginEmail'
+                                value={ loginEmail }
+                                onChange={ onLoginInputChange }
                             />
                         </div>
-                        {/* Campo de entrada para la contraseña */}
+                        
                         <div className="form-group mb-2">
                             <input
                                 type="password"
                                 className="form-control"
                                 placeholder="Contraseña"
+                                name='loginPassword'
+                                value={ loginPassword }
+                                onChange={ onLoginInputChange }
                             />
                         </div>
-                        {/* Botón de encío de formulario de login */}
+                        
                         <div className="d-grid gap-2">
                             <input 
                                 type="submit"
@@ -45,43 +102,55 @@ export const LoginPage = () => {
                     </form>
                 </div>
 
-                {/* Formulario de registro */}
+                {/* Formulario de Registro */}
                 <div className="col-md-6 login-form-2">
                     <h3>Registro</h3>
-                    <form>
-                        {/* Campo de entrada para el nombre */}
+                    <form onSubmit={ registerSubmit }>
+                       
                         <div className="form-group mb-2">
                             <input
                                 type="text"
                                 className="form-control"
                                 placeholder="Nombre"
+                                name='registerName'
+                                value={ registerName }
+                                onChange={ onRegisterInputChange }
                             />
                         </div>
-                        {/* Campo de entrada para el correo electrónico */}
+                        
                         <div className="form-group mb-2">
                             <input
                                 type="email"
                                 className="form-control"
                                 placeholder="Correo"
+                                name='registerEmail'
+                                value={ registerEmail }
+                                onChange={ onRegisterInputChange }
                             />
                         </div>
-                        {/* Campo de entrada para la contraseña */}
+                        
                         <div className="form-group mb-2">
                             <input
                                 type="password"
                                 className="form-control"
-                                placeholder="Contraseña" 
+                                placeholder="Contraseña"
+                                name='registerPassword'
+                                value={ registerPassword }
+                                onChange={ onRegisterInputChange } 
                             />
                         </div>
-                        {/* Campo de entrada para repetir la contraseña */}
+                        
                         <div className="form-group mb-2">
                             <input
                                 type="password"
                                 className="form-control"
                                 placeholder="Repita la contraseña" 
+                                name='registerPassword2'
+                                value={ registerPassword2 }
+                                onChange={ onRegisterInputChange }
                             />
                         </div>
-                        {/* Botón de envío de formulario de registro */}
+                        
                         <div className="d-grid gap-2">
                             <input 
                                 type="submit" 

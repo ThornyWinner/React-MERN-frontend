@@ -1,27 +1,25 @@
-//* Esta función devuelve un objeto con traducciones en español para personalizar los textos que se muestran en la vista del calendario.
-//* allDay: Traducción de "All day" (todo el día).
-//* previous y next: Definen los textos o símbolos que se muestran para navegar entre las fechas (anterior y siguiente).
-//* today: Traducción de "Today" para llevar al usuario al día actual.
-//* month, week, day, agenda: Definen las vistas disponibles en el calendario.
-//* date, time, event: Etiquetas de las columnas para organizar eventos por fecha, hora y título.
-//* noEventsInRange: Mensaje que se muestra si no hay eventos en el rango seleccionado.
-//* showMore: Función que recibe el número total de eventos adicionales no mostrados y los indica con un texto como "+ Ver más (total)".
+//* Mensajes de Interfaz: Cada propiedad representa un texto específico que react-big-calendar usa en su interfaz. 
+//*                       Esta función ajusta estos textos al español, permitiendo que el calendario tenga una interfaz amigable y localizada.
+//* showMore: La propiedad showMore es una función que recibe el parámetro total, el cual indica la cantidad de eventos adicionales. 
+//*           Devuelve el texto "Ver más" junto con el número de eventos adicionales en el día, en un formato como "+ Ver más (3)".
+//* Uso en el proyecto: Esta función puede ser importada en el archivo donde se configura react-big-calendar para asignar estos mensajes y ajustar la interfaz en español.
 
 
+// Exportamos una función que retorna los mensajes en español para react-big-calendar
 export const getMessagesES = () => {
     return {
         allDay: 'Todo el día',  // Texto para eventos que duran todo el día
-        previous: '<',  // Texto para botón de navegación anterior
-        next: '>',  // Texto para botón de navegación siguiente
-        today: 'Hoy',   // Texto para botón de hoy
-        month: 'Mes',   // Texto para la vista de mes
-        week: 'Semana', // Texto para la vista de semana
-        day: 'Día', // Texto para la vista de día
-        agenda: 'Agenda',   // Texto para la vista de agenda
-        date: 'Fecha',  // Texto de cabecera para la columna de fecha
-        time: 'Hora',   // Texto de cabecera para la columna de hora
-        event: 'Evento',    // Texto de cabecera para la columna de evento
-        noEventsInRange: 'No hay eventos en este rango',    // Mensaje cuando no hay eventos en el rango seleccionado
-        showMore: total => `+ Ver más (${total})`   // Texto para mostrar más eventos cuando hay muchos
+        previous: '<',  // Texto para el botón de navegación anterior
+        next: '>',  // Texto para el botón de navegación siguiente
+        today: 'Hoy',   // Texto para el botón de "hoy"
+        month: 'Mes',   // Texto para la vista de "mes"
+        week: 'Semana', // Texto para la vista de "semana"
+        day: 'Día',  // Texto para la vista de "día"
+        agenda: 'Agenda',   // Texto para la vista de "agenda"
+        date: 'Fecha',  // Etiqueta para el campo de fecha
+        time: 'Hora',   // Etiqueta para el campo de hora
+        event: 'Evento',    // Texto genérico para "evento"
+        noEventsInRange: 'No hay eventos en este rango',    // Texto cuando no hay eventos visibles en el rango seleccionado
+        showMore: total => `+ Ver más (${total})`   // Texto para ver más eventos, con el total de eventos ocultos
     };
 }
