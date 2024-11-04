@@ -13,9 +13,11 @@
 import { useState } from 'react';
 import { Calendar } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import { CalendarEvent, CalendarModal, FabAddNew, FabDelete, Navbar } from '../';
+
+import { Navbar, CalendarEvent, CalendarModal, FabAddNew, FabDelete} from '../';
+
 import { localizer, getMessagesES } from '../../helpers';
-import { useUiStore, useCalendarStore, useAuthStore } from '../../hooks';
+import { useUiStore, useCalendarStore } from '../../hooks';
 
 // Componente principal de la página del calendario
 export const CalendarPage = () => {
@@ -29,8 +31,6 @@ export const CalendarPage = () => {
 
   // Función para personalizar el estilo de los eventos del calendario
   const eventStyleGetter = ( event, start, end, isSelected ) => {
-    
-    const isMyEvent = ( user.uid === event.user._id ) || ( user.uid === event.user.uid );
     
     const style = {
       backgroundColor: '#347CF7', // Color de fondo del evento

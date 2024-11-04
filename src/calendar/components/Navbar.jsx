@@ -5,7 +5,7 @@
 
 
 // Importamos el hook personalizado para la autenticación y manejo de sesión
-import { useAuthStore } from '../../hooks';
+import { useAuthStore } from '../../hooks/useAuthStore';
 
 // Componente Navbar para mostrar el nombre de usuario y un botón de cierre de sesión
 export const Navbar = () => {
@@ -17,7 +17,6 @@ export const Navbar = () => {
   return (
     <div className="navbar navbar-dark bg-dark mb-4 px-4">
       
-
       <span className="navbar-brand">
           <i className="fas fa-calendar-alt"></i> 
           &nbsp;  

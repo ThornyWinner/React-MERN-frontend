@@ -7,9 +7,9 @@
 
 // Importaciones necesarias desde React, hooks personalizados, estilos CSS y SweetAlert2 para alertas visuales.
 import { useEffect } from 'react';
+import Swal from 'sweetalert2';
 import { useAuthStore, useForm } from '../../hooks';
 import './LoginPage.css';
-import Swal from 'sweetalert2';
 
 // Campos iniciales para el formulario de inicio de sesión
 const loginFormFields = {

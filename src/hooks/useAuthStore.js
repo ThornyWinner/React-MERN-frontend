@@ -32,7 +32,7 @@ export const useAuthStore = () => {
             dispatch( onLogout('Credenciales incorrectas') );
             setTimeout(() => {
                 dispatch( clearErrorMessage() );
-            }, 10 );
+            }, 10);
         }
     }
 
@@ -48,7 +48,7 @@ export const useAuthStore = () => {
             dispatch( onLogout(error.response.data?.msg || 'Por favor, completa todos los campos') );
             setTimeout(() => {
                 dispatch( clearErrorMessage() );
-            }, 10 );
+            }, 10);
         }
     }
 

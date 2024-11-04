@@ -5,11 +5,11 @@
 
 
 // Importamos los hooks y utilidades necesarias para manejar el estado, fechas, modal y alertas visuales
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { addHours, differenceInSeconds } from 'date-fns';
 
 import Swal from 'sweetalert2';
-import 'sweetalert2/dist/sweetalert2.min.css'
+import 'sweetalert2/dist/sweetalert2.min.css';
 
 import Modal from 'react-modal';
 
@@ -74,7 +74,7 @@ export const CalendarModal = () => {
     
 
     // Función para manejar cambios en los campos de texto
-    const onInputChange = ({ target }) =>{
+    const onInputChanged = ({ target }) =>{
         setFormValues({
             ...formValues,
             [target.name]: target.value
@@ -181,7 +181,7 @@ export const CalendarModal = () => {
                         name="title"
                         autoComplete="off"
                         value={ formValues.title }
-                        onChange={ onInputChange }
+                        onChange={ onInputChanged }
                     />
                     <small id="emailHelp" className="form-text text-muted">Una descripción corta</small>
                 </div>
@@ -195,7 +195,7 @@ export const CalendarModal = () => {
                         rows="5"
                         name="notes"
                         value={ formValues.notes }
-                        onChange={ onInputChange }
+                        onChange={ onInputChanged }
                     ></textarea>
                     <small id="emailHelp" className="form-text text-muted">Información adicional</small>
                 </div>

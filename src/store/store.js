@@ -8,7 +8,6 @@
 
 
 import { configureStore } from '@reduxjs/toolkit';
-
 import { uiSlice, calendarSlice, authSlice } from './';
 
 

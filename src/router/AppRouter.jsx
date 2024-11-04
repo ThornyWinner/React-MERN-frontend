@@ -19,16 +19,14 @@ import { useAuthStore } from '../hooks';
 
 // Define el componente principal de rutas de la aplicación
 export const AppRouter = () => {
-
+    
+    // Estado de autenticación simulado ( puede ser 'authenticated' o 'not-authenticated')
+    // const authStatus = 'not-authenticated';
     const { status, checkAuthToken } =useAuthStore();
 
     useEffect(() => {
         checkAuthToken();
     }, [])
-    
-
-    // Estado de autenticación simulado ( puede ser 'authenticated' o 'not-authenticated')
-    // const authStatus = 'not-authenticated';
 
     // Condicional para mostrar un mensaje de carga si la autenticación está siendo verificada
     if (status === 'checking') {

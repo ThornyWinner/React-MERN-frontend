@@ -11,8 +11,8 @@
 //*                          se exportan para que puedan ser utilizadas desde otras partes de la aplicación.
 
 
-import { createSlice } from "@reduxjs/toolkit";
-// import { addHours } from "date-fns";
+import { createSlice } from '@reduxjs/toolkit';
+import { addHours } from 'date-fns';
 
 // Evento temporal de ejemplo para inicializar el estado
 const tempEvent = {
@@ -31,7 +31,6 @@ const tempEvent = {
 export const calendarSlice = createSlice({
     name: 'calendar',
     initialState: {
-        isLoadingEvents: true,
         events: [
             tempEvent   // Inicialización del evento temporal
         ],
@@ -64,32 +63,9 @@ export const calendarSlice = createSlice({
                 state.activeEvent = null ;  // Desactiva el evento activo tras eliminarlo
             }
         },
-        onLoadEvents: (state, { payload = [] }) => {
-            state.isLoadingEvents = false;
-            // state.events = payload;
-            payload.forEach( event => {
-                const exists = state.events.some( dbEvent => dbEvent.id === event.id );
-                if ( !exists ) {
-                    state.events.push( event )
-                }
-            })
-        },
-        onLogoutCalendar:( state ) => {
-            state.isLoadingEvents = true,
-            state.events = [
-            ],  // Estado inicial con un evento temporal
-            state.activeEvent = null   // Evento activo inicialmente es nulo (ningún evento seleccionado)
-        }
     }
 });
 
 
 // Action creators generados automáticamente para cada función reductora
-export const {
-    onAddNewEvent,
-    onDeleteEvent,
-    onLoadEvents,
-    onLogoutCalendar,
-    onSetActiveEvent,
-    onUpdateEvent
-} = calendarSlice.actions;
+export const { onAddNewEvent, onDeleteEvent, onSetActiveEvent, onUpdateEvent } = calendarSlice.actions;

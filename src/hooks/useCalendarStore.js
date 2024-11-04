@@ -9,12 +9,8 @@
 //* Retorno del hook: Propiedades y métodos que permiten a los componentes interactuar con el estado y realizar 
 //*                   operaciones CRUD sobre los eventos del calendario desde cualquier lugar de la aplicación.
 
-import { useDispatch, useSelector } from "react-redux"
-import Swal from "sweetalert2";
-import { calendarApi } from "../api";
-import { convertEventsToDateEvents } from "../helpers";
-import { onAddNewEvent, onDeleteEvent, onLoadEvents, onSetActiveEvent, onUpdateEvent } from "../store";
-
+import { useDispatch, useSelector } from 'react-redux';
+import { onAddNewEvent, onDeleteEvent, onSetActiveEvent, onUpdateEvent } from '../store';
 
 
 export const useCalendarStore = () => {
@@ -29,22 +25,13 @@ export const useCalendarStore = () => {
 
     // Inicia la operación de guardar un evento, ya sea para actualizar o crear uno nuevo
     const startSavingEvent = async( calendarEvent ) => {
-        
-        try {
+        // TODO: llegar al backend
 
-            // Si el evento ya tiene un id, significa que debe actualizarse
-            if( calendarEvent.id ) {
-                // Actualizando
-                await calendarApi.put(`/events/${ calendarEvent.id }`, calendarEvent );
-                dispatch( onUpdateEvent({ ...calendarEvent, user }) );    // Despacha la acción para actualizar el evento
-                return;
-            } 
-
-        // Si el evento ya tiene un ID, se actualiza; si no, se crea uno nuevo
+        // Todo bien
         if( calendarEvent._id ) {
             // Actualizando
             dispatch( onUpdateEvent({ ...calendarEvent }) );
-        } else{
+        } else {
             // Creando
             dispatch( onAddNewEvent({ ...calendarEvent, _id: new Date().getTime() }) );
         }
@@ -53,14 +40,8 @@ export const useCalendarStore = () => {
 
     // Elimina el evento activo
     const startDeletingEvent = async() => {
-        try{
-            await calendarApi.delete(`/events/${ activeEvent.id }` );
-            dispatch( onDeleteEvent() );    // Despacha la acción para eliminar el evento activo
-        } catch (error){
-            console.log(error);
-            Swal.fire('Error al eliminar', error.response.data.msg, 'error');
-        }
-    }
+        // Todo: Llegar al backend
+
 
         dispatch( onDeleteEvent() );
     }
