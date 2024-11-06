@@ -9,7 +9,6 @@
 import { useEffect } from 'react';
 import Swal from 'sweetalert2';
 import { useAuthStore, useForm } from '../../hooks';
-//import emailProviders from 'email-providers';
 import './LoginPage.css';
 
 // Función para validar el formato del correo electrónico
