@@ -1031,6 +1031,11 @@ electron-to-chromium@^1.5.28:
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.5.29.tgz#aa592a3caa95d07cc26a66563accf99fa573a1ee"
   integrity sha512-PF8n2AlIhCKXQ+gTpiJi0VhcHDb69kYX4MtCiivctc2QD3XuNZ/XIOlbGzt7WAjjEev0TtaH6Cu3arZExm5DOw==
 
+email-providers@^2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/email-providers/-/email-providers-2.5.0.tgz#63c24fae21ebd72e81863c8d45a6d5ee8c1c0c33"
+  integrity sha512-GAHtmVVmiKL5kHUlskt30nIz8YQPDEhkQw9AxdSJL6nU0PRUGpjpcNdVVesSZrMgmTS8YOAjW3DWbvy4IxbgDA==
+
 es-abstract@^1.17.5, es-abstract@^1.22.1, es-abstract@^1.22.3, es-abstract@^1.23.0, es-abstract@^1.23.1, es-abstract@^1.23.2, es-abstract@^1.23.3:
   version "1.23.3"
   resolved "https://registry.yarnpkg.com/es-abstract/-/es-abstract-1.23.3.tgz#8f0c5a35cd215312573c5a27c87dfd6c881a0aa0"

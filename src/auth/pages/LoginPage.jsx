@@ -9,7 +9,14 @@
 import { useEffect } from 'react';
 import Swal from 'sweetalert2';
 import { useAuthStore, useForm } from '../../hooks';
+//import emailProviders from 'email-providers';
 import './LoginPage.css';
+
+// Función para validar el formato del correo electrónico
+function validateEmail(email) {
+    const regex = /^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/gm;
+    return regex.test(email);
+}
 
 // Campos iniciales para el formulario de inicio de sesión
 const loginFormFields = {
@@ -38,12 +45,26 @@ export const LoginPage = () => {
     // Función para manejar el envío del formulario de inicio de sesión
     const loginSubmit = ( event ) => { 
         event.preventDefault(); // Evitamos el comportamiento predeterminado del formulario
+        
+        // Validación del formato y dominio del correo electrónico
+        if (!validateEmail(loginEmail)) {
+            Swal.fire('Error', 'Por favor ingrese un correo válido', 'error');
+            return;
+        }
+        
         startLogin({ email: loginEmail, password: loginPassword }); // Ejecutamos la función startLogin con las credenciales ingresadas
     }
 
     // Función para manejar el envío del formulario de registro
     const registerSubmit = ( event ) => { 
         event.preventDefault();
+
+        // Validación del formato y dominio del correo electrónico
+        if (!validateEmail(registerEmail)) {
+            Swal.fire('Error en registro', 'Por favor ingrese un correo válido', 'error');
+            return;
+        }
+
         // Verificamos si las contraseñas coinciden antes de enviar el formulario
         if ( registerPassword !== registerPassword2 ){
             Swal.fire('Error en registro', 'Las contraseñas no coinciden', 'error');    // Mostramos una alerta si las contraseñas no coinciden
