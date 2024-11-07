@@ -13,7 +13,7 @@ import './LoginPage.css';
 
 // Función para validar el formato del correo electrónico
 function validateEmail(email) {
-    const regex = /^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/gm;
+    const regex = /^[\w\.-]+@saltillo\.tecnm\.mx$/i;;
     return regex.test(email);
 }
 
@@ -45,7 +45,7 @@ export const LoginPage = () => {
     const loginSubmit = ( event ) => { 
         event.preventDefault(); // Evitamos el comportamiento predeterminado del formulario
         
-        // Validación del formato y dominio del correo electrónico
+        // Validación del formato del correo electrónico
         if (!validateEmail(loginEmail)) {
             Swal.fire('Error', 'Por favor ingrese un correo válido', 'error');
             return;
@@ -58,9 +58,9 @@ export const LoginPage = () => {
     const registerSubmit = ( event ) => { 
         event.preventDefault();
 
-        // Validación del formato y dominio del correo electrónico
+        // Validación del formato del correo electrónico
         if (!validateEmail(registerEmail)) {
-            Swal.fire('Error en registro', 'Por favor ingrese un correo válido', 'error');
+            Swal.fire('Error en registro', 'Por favor ingrese un correo con terminación @saltillo.tecnm.mx', 'error');
             return;
         }
 
