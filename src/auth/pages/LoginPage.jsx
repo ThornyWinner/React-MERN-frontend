@@ -11,6 +11,12 @@ import Swal from 'sweetalert2';
 import { useAuthStore, useForm } from '../../hooks';
 import './LoginPage.css';
 
+// Función para validar el formato del correo electrónico
+function validateEmail(email) {
+    const regex = /^[\w\.-]+@saltillo\.tecnm\.mx$/i;;
+    return regex.test(email);
+}
+
 // Campos iniciales para el formulario de inicio de sesión
 const loginFormFields = {
     loginEmail: '',
@@ -38,12 +44,26 @@ export const LoginPage = () => {
     // Función para manejar el envío del formulario de inicio de sesión
     const loginSubmit = ( event ) => { 
         event.preventDefault(); // Evitamos el comportamiento predeterminado del formulario
+        
+        // Validación del formato del correo electrónico
+        if (!validateEmail(loginEmail)) {
+            Swal.fire('Error', 'Por favor ingrese un correo válido', 'error');
+            return;
+        }
+        
         startLogin({ email: loginEmail, password: loginPassword }); // Ejecutamos la función startLogin con las credenciales ingresadas
     }
 
     // Función para manejar el envío del formulario de registro
     const registerSubmit = ( event ) => { 
         event.preventDefault();
+
+        // Validación del formato del correo electrónico
+        if (!validateEmail(registerEmail)) {
+            Swal.fire('Error en registro', 'Por favor ingrese un correo con terminación @saltillo.tecnm.mx', 'error');
+            return;
+        }
+
         // Verificamos si las contraseñas coinciden antes de enviar el formulario
         if ( registerPassword !== registerPassword2 ){
             Swal.fire('Error en registro', 'Las contraseñas no coinciden', 'error');    // Mostramos una alerta si las contraseñas no coinciden
