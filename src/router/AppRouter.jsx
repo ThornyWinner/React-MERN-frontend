@@ -16,49 +16,24 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { LoginPage } from '../auth';
 import { CalendarPage } from '../calendar';
 import { useAuthStore } from '../hooks';
-<<<<<<< HEAD
-
-=======
-import { useEffect } from 'react';
->>>>>>> cff31ad35a421d0e15a73fcf2ee8031810f50dca
 
 // Define el componente principal de rutas de la aplicación
 export const AppRouter = () => {
-
-<<<<<<< HEAD
+    
+    // Estado de autenticación simulado ( puede ser 'authenticated' o 'not-authenticated')
+    // const authStatus = 'not-authenticated';
     const { status, checkAuthToken } =useAuthStore();
 
     useEffect(() => {
         checkAuthToken();
     }, [])
-    
-
-    // Estado de autenticación simulado ( puede ser 'authenticated' o 'not-authenticated')
-    // const authStatus = 'not-authenticated';
 
     // Condicional para mostrar un mensaje de carga si la autenticación está siendo verificada
     if (status === 'checking') {
-=======
-    const { status, checkAuthToken } = useAuthStore();
-    // Estado de autenticación simulado (puede ser 'authenticated' o 'not-authenticated')
-    //const authStatus = 'not-authenticated';
-    
-    useEffect(() => {
-      checkAuthToken();
-    }, [])
-    
-
-
-    if ( status === 'checking' ) {
->>>>>>> cff31ad35a421d0e15a73fcf2ee8031810f50dca
         return (
             <h3>Cargando...</h3>
         )
     }
-<<<<<<< HEAD
-=======
-
->>>>>>> cff31ad35a421d0e15a73fcf2ee8031810f50dca
 
     return (
         <Routes>
@@ -66,7 +41,6 @@ export const AppRouter = () => {
                 // Rutas según el estado de autenticación del usuario
                 // Si el usuario no está autenticado, muestra la ruta de autenticación (LoginPage)
                 (status === 'not-authenticated')    
-<<<<<<< HEAD
                     ? (
                         <>
                             <Route path='/auth/*' element={ <LoginPage /> }/>
@@ -81,22 +55,6 @@ export const AppRouter = () => {
                             <Route path='/*' element={ <Navigate to="/" /> } />
                         </>
                     ) 
-=======
-                ? (
-                    <>
-                        <Route path='/auth/*' element={ <LoginPage /> }/>
-                        {/* Redirección por defecto: si no coincide ninguna ruta, envía a /auth/login */}
-                        <Route path='/*' element={ <Navigate to="/auth/login" /> } />
-                    </>
-                )
-                // Si está autenticado, muestra la ruta del calendario (CalendarPage)
-                : (
-                    <>
-                        <Route path='/' element={ <CalendarPage /> }/>
-                        <Route path='/*' element={ <Navigate to="/" /> } />
-                    </>
-                )
->>>>>>> cff31ad35a421d0e15a73fcf2ee8031810f50dca
             }
             
             

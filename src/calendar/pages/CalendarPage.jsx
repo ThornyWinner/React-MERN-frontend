@@ -9,33 +9,22 @@
 //*                de edición de eventos, los botones de agregar y eliminar eventos y el componente de mensajes.
 
 
-<<<<<<< HEAD
 // Importamos las dependencias y componentes necesarios
 import { useState } from 'react';
-=======
-// Importa los hooks de React y los componentes necesarios
-import { useEffect, useState } from 'react';
->>>>>>> cff31ad35a421d0e15a73fcf2ee8031810f50dca
 import { Calendar } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import { CalendarEvent, CalendarModal, FabAddNew, FabDelete, Navbar } from '../';
+
+import { Navbar, CalendarEvent, CalendarModal, FabAddNew, FabDelete} from '../';
+
 import { localizer, getMessagesES } from '../../helpers';
-import { useUiStore, useCalendarStore, useAuthStore } from '../../hooks';
+import { useUiStore, useCalendarStore } from '../../hooks';
 
 // Componente principal de la página del calendario
 export const CalendarPage = () => {
 
-<<<<<<< HEAD
   // Hooks para manejar el estado y la interfaz
   const { openDateModal } = useUiStore(); // Función para abrir el modal de eventos
   const { events, setActiveEvent } = useCalendarStore();  // Estado de eventos y función para establecer un evento activo
-=======
-  const { user } = useAuthStore();
-  // Hook personalizado para manejar el estado de la interfaz (UI)
-  const { openDateModal } = useUiStore();
-  // Hook personalizado para manejar el estado del calendario
-  const { events, setActiveEvent, startLoadingEvents } = useCalendarStore();
->>>>>>> cff31ad35a421d0e15a73fcf2ee8031810f50dca
   
   // Estado para recordar la última vista seleccionada
   const [ lastView, setLastView ] = useState(localStorage.getItem('lastView') || 'week' );
@@ -43,20 +32,11 @@ export const CalendarPage = () => {
   // Función para personalizar el estilo de los eventos del calendario
   const eventStyleGetter = ( event, start, end, isSelected ) => {
     
-    const isMyEvent = ( user.uid === event.user._id ) || ( user.uid === event.user.uid );
-    
     const style = {
-<<<<<<< HEAD
       backgroundColor: '#347CF7', // Color de fondo del evento
       borderRadius: '0px',  // Bordes del evento
       opacity: 0.8, // Opacidad del evento
       color: 'white'  // Color del texto del evento
-=======
-      backgroundColor: isMyEvent ? '#347CF7' : '#465660', // Color de fondo azul
-      borderRadius: '0px',  // Sin bordes redondeados
-      opacity: 0.8, // Transparencia
-      color: 'white'  // Texto en blanco
->>>>>>> cff31ad35a421d0e15a73fcf2ee8031810f50dca
     }
 
     return {
@@ -83,15 +63,7 @@ export const CalendarPage = () => {
   }
 
 
-<<<<<<< HEAD
   // Renderización del componente
-=======
-  useEffect(() => {
-    startLoadingEvents()
-  }, [])
-  
-
->>>>>>> cff31ad35a421d0e15a73fcf2ee8031810f50dca
   return (
     <>
       <Navbar />  {/* Barra de navegación */}

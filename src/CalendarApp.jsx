@@ -6,7 +6,7 @@
 import { Provider } from 'react-redux'; // Importa el componente Provider de react-redux para conectar la app con el store de Redux
 import { BrowserRouter } from 'react-router-dom';   // Importa BrowserRouter de react-router-dom para manejar la navegación entre rutas
 import { AppRouter } from './router';   // Importa AppRouter,el cual contiene la lógica de las rutas de la aplicación
-import { store } from "./store";    // Importa el store de Redux, donde se almacenará el estado global de la aplicación
+import { store } from './store';    // Importa el store de Redux, donde se almacenará el estado global de la aplicación
 
 // Define el componente principal de la aplicación, CalendarApp
 export const CalendarApp = () => {
