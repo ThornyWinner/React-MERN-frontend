@@ -19,7 +19,6 @@ import 'react-datepicker/dist/react-datepicker.css';
 import es from 'date-fns/locale/es';
 import { useCalendarStore, useUiStore } from '../../hooks';
 
-
 // Configuramos el idioma español para el selector de fechas
 registerLocale( 'es', es );
 
@@ -137,9 +136,8 @@ export const CalendarModal = () => {
 
                 {/* Selector de fecha y hora de inicio */}
                 <div className="form-group mb-2">
-                    <label>Fecha y hora inicio</label>
-                    <div>
-                        <DatePicker 
+                    <label>Fecha y hora inicio </label>
+                        <DatePicker
                             selected={ formValues.start }
                             onChange={ (event) => onDateChanged(event, 'start') }
                             className='form-control'
@@ -148,14 +146,11 @@ export const CalendarModal = () => {
                             locale="es"
                             timeCaption='Hora'
                         />
-                    </div>
                 </div>
 
                 {/* Selector de fecha y hora de fin */}
                 <div className="form-group mb-2">
-                    <label>Fecha y hora fin</label>
-                    
-                    <div>
+                    <label>Fecha y hora fin </label>
                         <DatePicker 
                             minDate={ formValues.start }
                             selected={ formValues.end }
@@ -166,7 +161,6 @@ export const CalendarModal = () => {
                             locale="es"
                             timeCaption='Hora'
                         />
-                    </div>
                 </div>
 
                 <hr />
