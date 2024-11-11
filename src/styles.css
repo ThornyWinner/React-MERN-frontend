@@ -63,7 +63,9 @@ con animación de transición suave y alta prioridad en el apilamiento visual */
 /* Estilo del botón flotante con forma circular, tamaño grande, y posición fija 
 en la esquina inferior derecha de la pantalla */
 .fab {
+  border-color: whitesmoke;
   border-radius: 100%;
+  border-width: 5 px;
   bottom: 25px;
   font-size: 30px;
   padding: 25px;
@@ -74,11 +76,23 @@ en la esquina inferior derecha de la pantalla */
 /* Estilo de un botón flotante "peligroso" (Eliminar),
  similar al anterior pero con tamaño y posición ajustados */
 .fab-danger {
+  border-color: whitesmoke;
   border-radius: 100%;
+  border-width: 5 px;
   bottom: 25px;
   font-size: 22px;
   height: 70px;
   left: 25px;
   position: fixed;
   width: 70px;
+}
+
+/* Estilo para el centrado de texto */
+.title-center {
+  text-align: center;
+}
+
+/* Estilo para mover el componente Datepicker hacia la derecha */
+.datepicker {
+  margin-left: 10px;
 }
