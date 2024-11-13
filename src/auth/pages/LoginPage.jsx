@@ -47,7 +47,7 @@ export const LoginPage = () => {
         
         // Validación del formato del correo electrónico
         if (!validateEmail(loginEmail)) {
-            Swal.fire('Error', 'Por favor ingrese un correo válido', 'error');
+            Swal.fire('Error', 'Por favor ingrese un correo que exista', 'error');
             return;
         }
         
