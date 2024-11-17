@@ -130,21 +130,22 @@ export const CalendarModal = () => {
             closeTimeoutMS={ 200 }
         >
             
-            <h1> EVENTO </h1> 
+            <h1 className='title-center'> EVENTO </h1> 
             <hr />
             <form className="container" onSubmit={ onSubmit }>
 
                 {/* Selector de fecha y hora de inicio */}
                 <div className="form-group mb-2">
-                    <label>Fecha y hora inicio </label>
+                    <label>Fecha y hora inicio</label>
                         <DatePicker
                             selected={ formValues.start }
                             onChange={ (event) => onDateChanged(event, 'start') }
-                            className='form-control'
+                            className='form-control datepicker'
                             dateFormat="Pp"
                             showTimeSelect
                             locale="es"
                             timeCaption='Hora'
+                            timeIntervals={ 30 }
                         />
                 </div>
 
@@ -155,11 +156,12 @@ export const CalendarModal = () => {
                             minDate={ formValues.start }
                             selected={ formValues.end }
                             onChange={ (event) => onDateChanged(event, 'end') }
-                            className='form-control'
+                            className='form-control datepicker'
                             dateFormat="Pp"
                             showTimeSelect
                             locale="es"
                             timeCaption='Hora'
+                            timeIntervals={ 30 }
                         />
                 </div>
 

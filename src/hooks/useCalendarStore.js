@@ -6,18 +6,24 @@
 //*     - startSavingEvent: Guarda el evento en el estado; si el evento tiene un _id, actualiza el evento existente,
 //*                         de lo contrario, crea un nuevo evento y le asigna un ID único.
 //*     - startDeletingEvent: Elimina el evento activo del estado.
+//*     - startDeletingEvent: Elimina el evento activo del estado.
+//*     - startLoadingEvents: Carga los eventos del calendario desde el servidor.
 //* Retorno del hook: Propiedades y métodos que permiten a los componentes interactuar con el estado y realizar 
 //*                   operaciones CRUD sobre los eventos del calendario desde cualquier lugar de la aplicación.
 
 import { useDispatch, useSelector } from 'react-redux';
-import { onAddNewEvent, onDeleteEvent, onSetActiveEvent, onUpdateEvent } from '../store';
+import Swal from 'sweetalert2';
+import { calendarApi } from '../api';
+import { convertEventsToDateEvents } from '../helpers';
+import { onAddNewEvent, onDeleteEvent, onSetActiveEvent, onUpdateEvent, onLoadEvents } from '../store';
 
 
 export const useCalendarStore = () => {
   
     const dispatch = useDispatch();
     const { events, activeEvent } = useSelector( state => state.calendar ); // Extraemos el estado del calendario desde Redux
-  
+    const { user } = useSelector( state => state.auth );
+
     // Establece un evento activo
     const setActiveEvent = ( calendarEvent ) => {
         dispatch( onSetActiveEvent( calendarEvent ) );
@@ -25,27 +31,63 @@ export const useCalendarStore = () => {
 
     // Inicia la operación de guardar un evento, ya sea para actualizar o crear uno nuevo
     const startSavingEvent = async( calendarEvent ) => {
-        // TODO: llegar al backend
+        
+        try {
+            
+            if( calendarEvent.id ) {
+                // Actualizando
+                await calendarApi.put(`/events/${ calendarEvent.id }`, calendarEvent);
+                dispatch( onUpdateEvent({ ...calendarEvent, user }) );
+                return;
+            }
 
-        // Todo bien
-        if( calendarEvent._id ) {
-            // Actualizando
-            dispatch( onUpdateEvent({ ...calendarEvent }) );
-        } else {
+            // TODO: Validar que el usuario sea el propietario del evento (no debe abrir el modal, la idea es que sea como el delete)
+            
+
+
+    
             // Creando
-            dispatch( onAddNewEvent({ ...calendarEvent, _id: new Date().getTime() }) );
+            const { data } = await calendarApi.post('/events', calendarEvent);
+            dispatch( onAddNewEvent({ ...calendarEvent, id: data.evento.id, user}) );
+
+        } catch (error) {
+            console.log(error);
+            Swal.fire('Error al guardar', error.response.data.msg, 'error');
         }
         
     }
 
     // Elimina el evento activo
     const startDeletingEvent = async() => {
-        // Todo: Llegar al backend
+        
+        try {
 
+            await calendarApi.delete( `/events/${ activeEvent.id }` );
+            dispatch( onDeleteEvent() );
 
-        dispatch( onDeleteEvent() );
+        } catch (error) {
+            console.log(error);
+            Swal.fire('Error al eliminar', error.response.data.msg, 'error');
+        }
+
     }
     
+    // Función para cargar/mostrar los eventos del calendario
+    const startLoadingEvents = async() => {
+        
+        try {
+
+            const { data } = await calendarApi.get('/events');
+            const events = convertEventsToDateEvents( data.eventos );
+            dispatch(onLoadEvents( events ));
+            
+        } catch (error) {
+            console.log('Error cargando eventos');
+            console.log(error);
+        }
+        
+    }
+
     return {
         //* Propiedades
         activeEvent,    // Evento actualmente seleccionado
@@ -53,9 +95,10 @@ export const useCalendarStore = () => {
         hasEventSelected: !!activeEvent,    // Verifica si hay un evento activo
 
         //* Métodos
-        startDeletingEvent, // Método para eliminar el evento activo
         setActiveEvent, // Método para seleccionar un evento como activo
-        startSavingEvent,   // Método para guardar o actualizar un evento
+        startDeletingEvent, // Método para eliminar el evento activo
+        startLoadingEvents,  // Método para cargar los eventos del calendario
+        startSavingEvent   // Método para guardar o actualizar un evento
     }
 
 }

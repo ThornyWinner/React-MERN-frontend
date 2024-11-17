@@ -10,21 +10,22 @@
 
 
 // Importamos las dependencias y componentes necesarios
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Calendar } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 import { Navbar, CalendarEvent, CalendarModal, FabAddNew, FabDelete} from '../';
 
 import { localizer, getMessagesES } from '../../helpers';
-import { useUiStore, useCalendarStore } from '../../hooks';
+import { useUiStore, useCalendarStore, useAuthStore } from '../../hooks';
 
 // Componente principal de la página del calendario
 export const CalendarPage = () => {
 
   // Hooks para manejar el estado y la interfaz
+  const { user } = useAuthStore();
   const { openDateModal } = useUiStore(); // Función para abrir el modal de eventos
-  const { events, setActiveEvent } = useCalendarStore();  // Estado de eventos y función para establecer un evento activo
+  const { events, setActiveEvent, startLoadingEvents } = useCalendarStore();  // Estado de eventos y función para establecer un evento activo
   
   // Estado para recordar la última vista seleccionada
   const [ lastView, setLastView ] = useState(localStorage.getItem('lastView') || 'week' );
@@ -32,8 +33,10 @@ export const CalendarPage = () => {
   // Función para personalizar el estilo de los eventos del calendario
   const eventStyleGetter = ( event, start, end, isSelected ) => {
     
+    const isMyEvent = ( user.uid === event.user._id ) || ( user.uid === event.user.uid );
+
     const style = {
-      backgroundColor: '#347CF7', // Color de fondo del evento
+      backgroundColor: isMyEvent ? '#347CF7' : '#465660', // Color de fondo del evento (azul para mis eventos, gris para otros)
       borderRadius: '0px',  // Bordes del evento
       opacity: 0.8, // Opacidad del evento
       color: 'white'  // Color del texto del evento
@@ -62,6 +65,10 @@ export const CalendarPage = () => {
     setLastView(event);  // Actualiza el estado de la última vista
   }
 
+  // Función para cargar los eventos del calendario
+  useEffect(() => {
+    startLoadingEvents();
+  }, []);
 
   // Renderización del componente
   return (
