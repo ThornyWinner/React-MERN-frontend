@@ -34,8 +34,8 @@ export const useUiStore = () => {
     // Método para alternar el estado del modal
     const toggleDateModal = () => {
         (isDateModalOpen)
-            ? openDateModal()   
-            : closeDateModal(); 
+            ? closeDateModal()
+            : openDateModal(); 
     }
 
     return {

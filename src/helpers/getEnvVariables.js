@@ -9,9 +9,11 @@
 // Definimos y exportamos una función para obtener las variables de entorno
 export const getEnvVariables = () => {
     
-    import.meta.env;    // Asegura que se invoque `import.meta.env` para acceder al entorno en Vite
+    // import.meta.env;    // Asegura que se invoque `import.meta.env` para acceder al entorno en Vite
 
     return {
-        ...import.meta.env  // Retorna todas las variables de entorno de `import.meta.env`
+        // ...import.meta.env  // Retorna todas las variables de entorno de `import.meta.env`
+        VITE_MODE: import.meta.env.VITE_MODE,
+        VITE_API_URL: import.meta.env.VITE_API_URL,
     }
 }

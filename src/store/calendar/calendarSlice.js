@@ -18,7 +18,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 // Evento temporal de ejemplo para inicializar el estado
 // const tempEvent = {
-//     _id: new Date().getTime(),
+//     id: new Date().getTime(),
 //     title: 'Cumpleaños del Jefe',
 //     notes: 'Hay que comprar el pastel',
 //     start: new Date(),

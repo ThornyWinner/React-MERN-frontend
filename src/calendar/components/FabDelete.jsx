@@ -4,7 +4,7 @@
 
 
 // Importamos los hooks personalizados para interactuar con el estado del calendario y la interfaz de usuario
-import { useCalendarStore, useUiStore } from '../../hooks'
+import { useCalendarStore } from '../../hooks'
 
 // Componente FabDelete para mostrar un botón flotante que permite eliminar eventos del calendario
 export const FabDelete = () => {
@@ -20,6 +20,7 @@ export const FabDelete = () => {
     // Renderización del botón, que se muestra solo cuando hay un evento seleccionado (hasEventSelected)
     return (
     <button
+        aria-label="btn-delete"
         className="btn btn-danger fab-danger"
         onClick={ handleDelete }
         style={{
