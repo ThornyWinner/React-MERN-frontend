@@ -13,6 +13,7 @@
 import { useEffect, useState } from 'react';
 import { Calendar } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
+import Swal from 'sweetalert2';
 
 import { Navbar, CalendarEvent, CalendarModal, FabAddNew, FabDelete} from '../';
 
@@ -24,7 +25,7 @@ export const CalendarPage = () => {
 
   // Hooks para manejar el estado y la interfaz
   const { user } = useAuthStore();
-  const { openDateModal } = useUiStore(); // Función para abrir el modal de eventos
+  const { openDateModal, closeDateModal } = useUiStore(); // Funciones para abrir y cerrar el modal de fecha
   const { events, setActiveEvent, startLoadingEvents } = useCalendarStore();  // Estado de eventos y función para establecer un evento activo
   
   // Estado para recordar la última vista seleccionada
@@ -49,8 +50,30 @@ export const CalendarPage = () => {
 
   // Función para manejar el doble clic en un evento
   const onDoubleClick = ( event ) => {
+
     // console.log({ doubleClick: event });
-    openDateModal();  // Abre el modal de edición de eventos
+
+    //Si el usuario no es el propietario del evento, cerrar el modal de edición
+    const isMyEvent = ( user.uid === event.user._id ) || ( user.uid === event.user.uid );
+    
+    // Con sweetalert
+    if ( !isMyEvent ) {
+      closeDateModal();
+      Swal.fire({
+        title: '¡Atención!',
+        text: 'No puedes editar eventos que no eres el propietario.',
+        icon: 'warning',
+        confirmButtonText: 'Aceptar',
+      });
+    } else {
+      openDateModal();
+    }
+    
+    // Alternativa sin sweetalert
+    // ( !isMyEvent )
+    //   ? closeDateModal()
+    //   : openDateModal();
+
   }
 
   // Función para manejar la selección de un evento
