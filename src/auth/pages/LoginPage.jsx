@@ -13,7 +13,7 @@ import './LoginPage.css';
 
 // Función para validar el formato del correo electrónico
 function validateEmail(email) {
-    const regex = /^[\w\.-]+@saltillo\.tecnm\.mx$/i;;
+    const regex = /^[\w\.-]+@gmail\.com$/i;;
     return regex.test(email);
 }
 
