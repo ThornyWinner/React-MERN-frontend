@@ -13,7 +13,7 @@ import './LoginPage.css';
 
 // Función para validar el formato del correo electrónico
 function validateEmail(email) {
-    const regex = /^[\w\.-]+@saltillo\.tecnm\.mx$/i;;
+    const regex = /^[\w\.-]+@gmail\.com$/i;;
     return regex.test(email);
 }
 
@@ -60,7 +60,8 @@ export const LoginPage = () => {
 
         // Validación del formato del correo electrónico
         if (!validateEmail(registerEmail)) {
-            Swal.fire('Error en registro', 'Por favor ingrese un correo con terminación @saltillo.tecnm.mx', 'error');
+            //TODO: CAMBIAR LA TERMINACIÓN DEL CORREO
+            Swal.fire('Error en registro', 'Por favor ingrese un correo con terminación @gmail.com', 'error');
             return;
         }
 
