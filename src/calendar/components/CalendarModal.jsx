@@ -18,6 +18,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 import es from 'date-fns/locale/es';
 import { useCalendarStore, useUiStore } from '../../hooks';
+import { getEnvVariables } from '../../helpers';
 
 // Configuramos el idioma español para el selector de fechas
 registerLocale( 'es', es );
@@ -34,8 +35,11 @@ const customStyles = {
     },
 };
 
-// Asociamos el modal al elemento raíz de la aplicación
-Modal.setAppElement('#root');
+// Revisa que esté en modo de desarrollo para asociar el modal al elemento raíz de la aplicación
+if ( getEnvVariables().VITE_MODE !== 'test' ) {
+    // Asociamos el modal al elemento raíz de la aplicación
+    Modal.setAppElement('#root');
+}
 
 // Componente CalendarModal para crear y editar eventos en el calendario
 export const CalendarModal = () => {

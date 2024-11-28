@@ -33,22 +33,19 @@ export const useCalendarStore = () => {
     const startSavingEvent = async( calendarEvent ) => {
         
         try {
-            
+        
             if( calendarEvent.id ) {
                 // Actualizando
                 await calendarApi.put(`/events/${ calendarEvent.id }`, calendarEvent);
                 dispatch( onUpdateEvent({ ...calendarEvent, user }) );
+                Swal.fire('Evento actualizado', 'El evento ha sido actualizado correctamente.', 'success');
                 return;
             }
-
-            // TODO: Validar que el usuario sea el propietario del evento (no debe abrir el modal, la idea es que sea como el delete)
-            
-
-
     
             // Creando
             const { data } = await calendarApi.post('/events', calendarEvent);
             dispatch( onAddNewEvent({ ...calendarEvent, id: data.evento.id, user}) );
+            Swal.fire('Evento creado', 'El evento ha sido creado correctamente.', 'success');
 
         } catch (error) {
             console.log(error);
@@ -64,6 +61,7 @@ export const useCalendarStore = () => {
 
             await calendarApi.delete( `/events/${ activeEvent.id }` );
             dispatch( onDeleteEvent() );
+            Swal.fire('Evento eliminado', 'El evento ha sido eliminado correctamente.', 'success');
 
         } catch (error) {
             console.log(error);

@@ -22,7 +22,7 @@ export const AppRouter = () => {
     
     // Estado de autenticación simulado ( puede ser 'authenticated' o 'not-authenticated')
     // const authStatus = 'not-authenticated';
-    const { status, checkAuthToken } =useAuthStore();
+    const { status, checkAuthToken } = useAuthStore();
 
     useEffect(() => {
         checkAuthToken();

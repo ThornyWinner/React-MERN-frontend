@@ -60,7 +60,7 @@ export const LoginPage = () => {
 
         // Validación del formato del correo electrónico
         if (!validateEmail(registerEmail)) {
-            Swal.fire('Error en registro', 'Por favor ingrese un correo con terminación @gmail.com', 'error');
+            Swal.fire('Error en registro', 'Por favor ingrese un correo con terminación @saltillo.tecnm.mx', 'error');
             return;
         }
 

@@ -41,6 +41,12 @@ export const useAuthStore = () => {
         dispatch( onChecking() );
         try{
             const { data } = await calendarApi.post('/auth/new', { email, password, name });
+            
+            console.log(data);
+            
+            //TODO: Enviar correo de confirmación
+
+
             localStorage.setItem('token', data.token);
             localStorage.setItem('token-init-date', new Date().getTime());
             dispatch( onLogin({ name: data.name, uid: data.uid, email: data.email }) );
